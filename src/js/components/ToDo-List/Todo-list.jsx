@@ -20,6 +20,10 @@ const Todolist = () => {
     console.log(data);
     setTasksList(data.todos);
   };
+  
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   const createUser = async () => {
     let response = await fetch(
@@ -74,16 +78,13 @@ const Todolist = () => {
   };
 
   const showList = () => {
-    let mapList = tasksList.map((task) => {
-      return <li key={task.id}>{task.label}
-      <span onClick={() => deleteTask(task.id)}>🗑</span>
+    let mapList = tasksList.map((item) => {
+      return <li key={item.id}>{item.label}
+      <span onClick={() => deleteTask(item.id)}>🗑</span>
       </li>;
     });
     return mapList;
   };
-  useEffect(() => {
-    fetchTasks();
-  }, []);
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
