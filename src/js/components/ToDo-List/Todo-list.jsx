@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Todo-list.css"
 
 const Todolist = () => {
   const [tasks, setTasks] = useState("");
@@ -20,7 +21,7 @@ const Todolist = () => {
     console.log(data);
     setTasksList(data.todos);
   };
-  
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -68,19 +69,18 @@ const Todolist = () => {
     );
     console.log(response)
     if (response.ok) {
-      const data = await response.json();
-      setTasksList((prev) => {
-        return prev.filter((task) => task.id !== todo_id);
-      });
+      setTasksList((prev) => prev.filter((task) => task.id !== todo_id));
+     
     } else {
       console.log("Error deleting task");
     }
+
   };
 
   const showList = () => {
     let mapList = tasksList.map((item) => {
-      return <li key={item.id}>{item.label}
-      <span onClick={() => deleteTask(item.id)}>🗑</span>
+      return <li className="col-12 singleList mt-1" key={item.id}>{item.label}
+      <button onClick={() => deleteTask(item.id)}>🗑</button>
       </li>;
     });
     return mapList;
@@ -93,18 +93,20 @@ const Todolist = () => {
       };
 
   return (
-    <div className="container mt-5">
-      <h1>MY TO DO LIST</h1>
-      <input
-        type="text"
-        placeholder="Enter a task"
-        value={tasks}
-        onChange={(e) => setTasks(e.target.value)}
-        onKeyDown={handleKeyPress}
-      />
-      <button onClick={addTask}>Add task</button>
+    <div className="container mt-5 d-flex flex-column justify-content-between align-items-center">
+      <h1 className="bg-secondary px-3 py-2"><span className="totalTask mx-2">{tasksList.length}</span>MY-TO-DO-LIST <span className="totalTask">{tasksList.length > 0 ? "🔋" : "🪫"}</span></h1>
       <div>
-        <ul>{showList()}</ul>
+        <input
+          type="text"
+          placeholder="Enter a task"
+          value={tasks}
+          onChange={(e) => setTasks(e.target.value)}
+          onKeyDown={handleKeyPress}
+        />
+        <button className="mx-1" onClick={addTask}>Add task</button>
+      </div>
+        <div className="container mt-3">
+        <ul className="row taskBox">{showList()}</ul>
       </div>
     </div>
   );

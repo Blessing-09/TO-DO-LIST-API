@@ -1,0 +1,25 @@
+h1 {
+    border: 3px groove #000;
+    filter: brightness(1.5);
+    font-weight: 900;
+}
+.totalTask {
+    border: 2px solid #361bba;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: smaller;
+    color: aqua;
+ 
+}
+.taskBox {
+    list-style-type: none;
+    padding-left: 0px;
+}
+.singleList {
+    padding: 10px;
+    border: 2px solid rgb(9, 9, 9);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
